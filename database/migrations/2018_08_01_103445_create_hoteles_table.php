@@ -17,6 +17,8 @@ class CreateHotelesTable extends Migration
             $table->increments('idhoteles');
             $table->string('nombre');
             $table->string('direccion');
+            $table->string('ciudad');
+            $table->string('departamento');            
             $table->integer('numeroHabitaciones');
             $table->timestamps();
         });

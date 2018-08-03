@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('foo', function () {
     return 'Hello World';
 });
+
+
+Route::resource('hotel', 'hotelController');

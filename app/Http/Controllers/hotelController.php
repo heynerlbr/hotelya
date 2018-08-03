@@ -13,7 +13,7 @@ class hotelController extends Controller
      */
     public function index()
     {
-        //
+        return view('hoteles.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class hotelController extends Controller
      */
     public function create()
     {
-        //
+        return view('hoteles.create');
     }
 
     /**
@@ -34,7 +34,15 @@ class hotelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \hotelya\hoteles::create([
+            'nombre'=>$request['nombre'],
+            'direccion'=>$request['direccion'],
+            'numeroHabitaciones'=>$request['numeroHabitaciones'],
+            'ciudad'=>$request['ciudad'],
+            'departamento'=>$request['departamento']
+        ]);
+
+        return 'el hotel fue registrado';
     }
 
     /**
