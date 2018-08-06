@@ -3,6 +3,7 @@
 namespace hotelya\Http\Controllers;
 
 use Illuminate\Http\Request;
+use hotelya\habitaciones;
 
 class habitacionController extends Controller
 {
@@ -13,7 +14,8 @@ class habitacionController extends Controller
      */
     public function index()
     {
-        //
+        $habitaciones=habitaciones::all();
+        return view('habitaciones.index',compact('habitaciones'));
     }
 
     /**
@@ -56,7 +58,12 @@ class habitacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $habitacion=habitaciones::find($id);
+        //probar si llegan los datos
+        //echo '<pre>';
+        //dd($habitacion);
+        //exit();
+       return view('habitaciones.edit',['habitacion'=>$habitacion]);
     }
 
     /**
@@ -68,7 +75,12 @@ class habitacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $habitacion=habitaciones::find($id);
+       $habitacion->fill($request->all());
+       $habitacion->save();
+
+       return redirect('/habitacion');
+
     }
 
     /**

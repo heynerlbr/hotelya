@@ -21,3 +21,4 @@ Route::get('foo', function () {
 
 
 Route::resource('hotel', 'hotelController');
+Route::resource('habitacion', 'habitacionController');

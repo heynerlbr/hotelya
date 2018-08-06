@@ -8,6 +8,6 @@ class habitaciones extends Model
 {
     protected $table='habitaciones';
     protected $primaryKey='idhabitaciones';
-    protected $fillable = ['numeroHabitacion','estado','precio','created_at','updated_at'];
+    protected $fillable = ['numeroHabitacion','tipo','estado','precio','created_at','updated_at'];
     public $timestamps = true;
 }

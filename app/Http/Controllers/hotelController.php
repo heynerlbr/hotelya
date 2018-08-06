@@ -3,6 +3,8 @@
 namespace hotelya\Http\Controllers;
 
 use Illuminate\Http\Request;
+use hotelya\hoteles;
+use hotelya\habitaciones;
 
 class hotelController extends Controller
 {
@@ -13,7 +15,8 @@ class hotelController extends Controller
      */
     public function index()
     {
-        return view('hoteles.index');
+        $habitaciones=habitaciones::all();
+        return view('hoteles.index',compact('habitaciones'));
     }
 
     /**
@@ -34,6 +37,11 @@ class hotelController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //saber si llegan datos  de la tabla hoteles
+        //echo('<pre>');
+        //var_dump($ultimo["numeroHabitaciones"]);
+        //exit();
         \hotelya\hoteles::create([
             'nombre'=>$request['nombre'],
             'direccion'=>$request['direccion'],
@@ -41,8 +49,20 @@ class hotelController extends Controller
             'ciudad'=>$request['ciudad'],
             'departamento'=>$request['departamento']
         ]);
+        $hoteles=hoteles::all();
+        $ultimo=$hoteles->last();
+        $cantidad=$ultimo["numeroHabitaciones"];
 
-        return 'el hotel fue registrado';
+        for ($i = 1; $i <= $cantidad; $i++) {
+            habitaciones::create([                
+                'numeroHabitacion'=>'0',
+                'estado'=>'libre',
+                'tipo'=>'ventilador',
+                'precio'=>'0',             
+            ]);
+        }
+
+        return redirect('/hotel')->with('message','store');
     }
 
     /**

@@ -16,8 +16,9 @@ class CreateHabitacionesTable extends Migration
         Schema::create('habitaciones', function (Blueprint $table) {
             $table->increments('idhabitaciones');
             $table->string('numeroHabitacion'); 
-            $table->float('precio', 8, 8);       
+            $table->integer('precio');       
             $table->enum('estado', ['libre', 'ocupado']);
+            $table->enum('tipo', ['ventilador', 'aire']);
             $table->timestamps();
         });
     }
