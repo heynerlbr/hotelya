@@ -5,6 +5,8 @@ namespace hotelya\Http\Controllers;
 use Illuminate\Http\Request;
 use hotelya\hoteles;
 use hotelya\habitaciones;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class hotelController extends Controller
 {
@@ -15,7 +17,18 @@ class hotelController extends Controller
      */
     public function index()
     {
-        $habitaciones=habitaciones::all();
+        $id = Auth::id();
+        //$habitaciones=habitaciones::all(); 
+
+        $habitaciones = DB::table('habitaciones')
+            ->join('hoteles', 'habitaciones.hoteles_idhoteles', '=', 'hoteles.idhoteles')
+            ->join('users', 'users.id', '=', 'hoteles.user_id')
+            ->select('habitaciones.*')
+            ->where('user_id',$id)
+            ->get();
+
+        //dd($habitaciones);
+        //exit();
         return view('hoteles.index',compact('habitaciones'));
     }
 
@@ -37,6 +50,8 @@ class hotelController extends Controller
      */
     public function store(Request $request)
     {
+        $id = Auth::id();
+       
         
         //saber si llegan datos  de la tabla hoteles
         //echo('<pre>');
@@ -47,18 +62,22 @@ class hotelController extends Controller
             'direccion'=>$request['direccion'],
             'numeroHabitaciones'=>$request['numeroHabitaciones'],
             'ciudad'=>$request['ciudad'],
-            'departamento'=>$request['departamento']
+            'departamento'=>$request['departamento'],
+            'user_id'=>$id
         ]);
         $hoteles=hoteles::all();
         $ultimo=$hoteles->last();
+        $ultimoid=$hoteles->last();
         $cantidad=$ultimo["numeroHabitaciones"];
+        $id=$ultimoid["idhoteles"];
 
         for ($i = 1; $i <= $cantidad; $i++) {
             habitaciones::create([                
                 'numeroHabitacion'=>'0',
                 'estado'=>'libre',
                 'tipo'=>'ventilador',
-                'precio'=>'0',             
+                'precio'=>'0', 
+                'hoteles_idhoteles'=>$id           
             ]);
         }
 

@@ -18,8 +18,10 @@ class CreateHabitacionesTable extends Migration
             $table->string('numeroHabitacion'); 
             $table->integer('precio');       
             $table->enum('estado', ['libre', 'ocupado']);
-            $table->enum('tipo', ['ventilador', 'aire']);
+            $table->enum('tipo', ['ventilador', 'aire']);        
             $table->timestamps();
+            $table->integer('hoteles_idhoteles')->unsigned();
+            $table->foreign('hoteles_idhoteles')->references('idhoteles')->on('hoteles')->onDelete('cascade');
         });
     }
 

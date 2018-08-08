@@ -16,7 +16,7 @@
           </div>
     @endif
     <section id="contenedor">
-       <header>hotel</header>
+       <header>bienvenidos  al hotel {{$habitaciones[0]->'nombre'}}</header>
         <section id="hotel-control">
             @foreach ($habitaciones as $h)
                 <div id="habitacion"><button type="button" class="btn btn-outline-primary"><img src="puerta.jpg" height="100" width="100" > {{ $h->numeroHabitacion }}--{{ $h->estado }}</button></div>                
