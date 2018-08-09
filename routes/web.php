@@ -12,12 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('foo', function () {
-    return 'Hello World';
-});
 
 
 Route::resource('hotel', 'hotelController');
@@ -62,3 +59,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+// Modulo de empleados
+Route::prefix('habitaciones')->group(function () {
+	//ajax empleados
+    Route::post('ajax_habitaciones',"hotelController@ajax_habitaciones")->name("ajax_habitaciones");
+	
+});
+

@@ -1,22 +1,23 @@
-*{
+* {
     border: 0;
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     background: #cccc;
 }
- #contenedor{
-background: #fff;
-height: 1500px;
-width: 1200px;
-margin-right: auto;
-margin-left: auto;
+
+#contenedor {
+    background: #fff;
+    /* height: 1500px; */
+    width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-#habitacion{
+#habitacion {
     height: 150px;
-    width: 240px;  
+    width: 240px;
     float: left;
-  
 }
